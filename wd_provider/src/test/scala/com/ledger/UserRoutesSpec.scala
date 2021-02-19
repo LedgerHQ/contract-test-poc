@@ -1,4 +1,4 @@
-package com.example
+package com.ledger
 
 import akka.actor.testkit.typed.scaladsl.ActorTestKit
 import akka.http.scaladsl.marshalling.Marshal
@@ -19,10 +19,9 @@ class UserRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures with Sc
   lazy val routes = new UserRoutes(userRegistry).userRoutes
 
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-  import JsonFormats._
+  import com.ledger.JsonFormats._
 
   "UserRoutes" should {
-    //#testing-post
     "be able to transform age (POST /user)" in {
       val user = User("John", 42)
       val userEntity = Marshal(user).to[MessageEntity].futureValue

@@ -1,4 +1,4 @@
-package com.example
+package com.ledger
 
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors

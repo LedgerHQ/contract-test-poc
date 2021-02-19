@@ -1,7 +1,6 @@
-package com.example
+package com.ledger
 
-import com.example.UserRegistry.{JudgmentPerformed}
-
+import com.ledger.UserRegistry.JudgmentPerformed
 import spray.json.DefaultJsonProtocol
 
 object JsonFormats  {

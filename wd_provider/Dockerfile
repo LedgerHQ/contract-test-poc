@@ -4,7 +4,7 @@
 
 ARG sbt_version=1.4.7
 ARG sbt_home=/usr/local/sbt
-ARG SCALA_VERSION=2.13.3
+ARG SCALA_VERSION=2.13.4
 ARG SCALA_HOME=/usr/share/scala
 
 FROM openjdk:jre-alpine as sbt
