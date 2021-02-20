@@ -1,0 +1,73 @@
+{
+  "consumer": {
+    "name": "gate"
+  },
+  "provider": {
+    "name": "wd"
+  },
+  "interactions": [
+    {
+      "description": "a request for User Doe",
+      "providerState": "User Doe is 123 years old",
+      "request": {
+        "method": "POST",
+        "path": "/user",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Doe",
+          "age": 123
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "age": "old",
+          "name": "Doe"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "a request for User Doe",
+      "providerState": "User Smith is 10 years old",
+      "request": {
+        "method": "POST",
+        "path": "/user",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Smith",
+          "age": 10
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "age": "young",
+          "name": "Smith"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

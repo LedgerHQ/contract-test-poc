@@ -1,4 +1,12 @@
+# General
 .DS_Store
+
+# gate
+**/__pycache__/
+**/.pytest_cache/
+**/pact-mock-service.log
+
+# wd
 **/.idea/
 **/.gradle/
 **/.bsp/
