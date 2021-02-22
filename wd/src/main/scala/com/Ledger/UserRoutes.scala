@@ -30,7 +30,7 @@ class UserRoutes(userRegistry: ActorRef[UserRegistry.Command])(implicit val syst
             post {
               entity(as[User]) { user =>
                 onSuccess(judge(user)) { performed =>
-                  complete((StatusCodes.Created, performed))
+                  complete((StatusCodes.OK, performed))
                 }
               }
             })

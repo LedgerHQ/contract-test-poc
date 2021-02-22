@@ -15,13 +15,21 @@ $ curl -H "Content-type: application/json" -X POST -d '{"name": "Bob", "age": 10
 
 Dockerized
 
+
 ### Package and Run
 
 ```
 sbt clean assembly && scala target/scala-2.13/wd_provider-assembly-0.1.0-SNAPSHOT.jar
 ```
 
-## TODO
+# Verify (external approach)
 
-- Interface with Python backend
-- Contract testing
+Terminal 1: run provider
+```
+sbt run
+```
+
+Terminal 2: verify
+```
+sbt "pactVerify --source pact/ --host localhost --port 8080 --protocol http"
+```
