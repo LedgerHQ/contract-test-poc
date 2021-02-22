@@ -36,7 +36,7 @@
       }
     },
     {
-      "description": "a request for User Doe",
+      "description": "a request for User Smith",
       "providerState": "User Smith is 10 years old",
       "request": {
         "method": "POST",
