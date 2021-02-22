@@ -3,31 +3,37 @@ import unittest
 import os
 import pytest
 
-from pact import Consumer, Like, Provider, Term
+from pact import Consumer, Like, Provider, Term, Format
 from gate.src.gate import request_wd
+
+PACT_BROKER_URL = "http://localhost/"
+PACT_BROKER_USERNAME = "pactbroker"
+PACT_BROKER_PASSWORD = "PoC_P4CT!"
 
 PACT_MOCK_HOST = 'localhost'
 PACT_MOCK_PORT = 8080
-PACT_DIR = os.path.dirname(os.path.realpath(__file__))
+PACT_DIR = './' # temporary fix: issue on macOS
+                #os.path.dirname(os.path.realpath(__file__))
 
 pact = Consumer('Consumer').has_pact_with(Provider('Provider'))
 pact.start_service()
 atexit.register(pact.stop_service)
 
-PACT_FILE = "user_age.json"
-
 URL = f"http://{PACT_MOCK_HOST}:{PACT_MOCK_PORT}/user"
 
 @pytest.fixture(scope='session')
 def pact(request):
+    #version = request.config.getoption('--publish-pact') # does not work
+
+    publish = True
+
     pact = Consumer('gate').has_pact_with(
         Provider('wd'), host_name=PACT_MOCK_HOST, port=PACT_MOCK_PORT,
-        pact_dir=PACT_DIR)
+        pact_dir=PACT_DIR, publish_to_broker=True, broker_base_url=PACT_BROKER_URL,
+        broker_username=PACT_BROKER_USERNAME, broker_password=PACT_BROKER_PASSWORD)
     pact.start_service()
     yield pact
     pact.stop_service()
-
-    #version = request.config.getoption('--publish-pact')
 
 
 def test_old_user(pact):

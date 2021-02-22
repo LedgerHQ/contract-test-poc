@@ -9,7 +9,8 @@ python3 gate.py
 ## Generate Pact File (as the Consumer)
 
 ```
-python -m pytest tests/pact_wd.py
+$ cd tests # important, due to an issue with the pacts directory (to be solved)
+$ python -m pytest pact_wd.py
 ```
 
 ## Issues

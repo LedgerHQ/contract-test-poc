@@ -43,9 +43,16 @@ Terminal 1: run provider
 $ sbt compile run
 ```
 
-Terminal 2: verify
+Terminal 2: 
+
+Option 1. Verify (using a JSON file)
 ```
 $ sbt "pactVerify --source pact/ --host localhost --port 8080 --protocol http"
+```
+
+Option 2. Verify (using a broker)
+```
+$ sbt "pactVerify --host localhost --port 8080 --protocol http"
 ```
 
 Example:
