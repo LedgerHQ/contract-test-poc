@@ -1,15 +1,15 @@
-# Quick implementation notes
+# gate (Provider and Consumer)
 
-## DONE
-
-API server (flask) and client (requests)
-
-Dockerized
-
-### Package and Run
+## Run
 
 ```
 python3 gate.py
+```
+
+## Generate Pact File (as the Consumer)
+
+```
+python -m pytest tests/pact_wd.py
 ```
 
 ## Issues
