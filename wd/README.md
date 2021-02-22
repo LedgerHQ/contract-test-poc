@@ -6,6 +6,7 @@
 
 ### Option 1. Run the Server Using Sbt
 ```
+$ sbt compile
 $ sbt run
 ```
 
@@ -39,12 +40,12 @@ $ curl -H "Content-type: application/json" -X POST -d '{"name": "Bob", "age": 10
 
 Terminal 1: run provider
 ```
-sbt run
+$ sbt compile run
 ```
 
 Terminal 2: verify
 ```
-sbt "pactVerify --source pact/ --host localhost --port 8080 --protocol http"
+$ sbt "pactVerify --source pact/ --host localhost --port 8080 --protocol http"
 ```
 
 Example:
@@ -79,6 +80,86 @@ Results for pact between gate and wd
 [scala-pact] Tests: succeeded 2, failed 0, pending 0
 [scala-pact] All Pact verify tests passed or pending.
 [success] Total time: 1 s, completed Feb 22, 2021, 2:53:41 PM
+```
+
+Example 2: modify the Provider (old when > 200):
+
+```
+--- a/wd/src/main/scala/com/Ledger/UserRegistry.scala
++++ b/wd/src/main/scala/com/Ledger/UserRegistry.scala
+@@ -20,7 +20,7 @@ object UserRegistry {
+       case JudgeAge(user, replyTo) =>
+         var age = user.age
+         var judgement = "young"
+-        if (age >= 100) {
++        if (age >= 200) {
+           judgement = "old"
+         }
+         replyTo ! JudgmentPerformed(s"${user.name}", judgement)
+```
+
+Then, re-run the server and the PACT verification:
+
+```
+$ sbt "pactVerify --source pact/ --host localhost --port 8080 --protocol http"
+[info] welcome to sbt 1.4.6 (Oracle Corporation Java 14.0.2)
+[info] loading global plugins from /Users/glethuillier/.sbt/1.0/plugins
+[info] loading settings for project wd-build from plugins.sbt ...
+[info] loading project definition from /Users/glethuillier/contract-test-poc/wd/project
+[info] loading settings for project root from build.sbt,pact.sbt ...
+[info] set current project to wd_provider (in build file:/Users/glethuillier/contract-test-poc/wd/)
+*************************************
+** ScalaPact: Running Verifier     **
+*************************************
+Attempting to use local pact files at: 'pact/'
+Verifying against 'localhost' on port '8080' with a timeout of 1 second(s).
+--------------------
+Attempting to run provider state: User Doe is 123 years old
+Provider state ran successfully
+--------------------
+cURL for request: curl -X POST 'http://localhost:8080/user' -H 'Content-Type: application/json' -H 'Content-Length: 35'
+--------------------
+Attempting to run provider state: User Smith is 10 years old
+Provider state ran successfully
+--------------------
+cURL for request: curl -X POST 'http://localhost:8080/user' -H 'Content-Type: application/json' -H 'Content-Length: 36'
+Results for pact between gate and wd
+ - [FAILED] a request for User Doe
+Failed to match response
+ ...original
+Response          [200]
+  headers:        [Server=akka-http/10.2.3,\n                   "Date=Mon, 22 Feb 2021 13:59:42 GMT,\n                   "Content-Type=application/json,\n                   "Content-Length=28]
+  matching rules: []
+  body:
+{"age":"young","name":"Doe"}
+
+
+ ...closest match was...
+Response          [200]
+  headers:        []
+  matching rules: []
+  body:
+{
+  "age" : "old",
+  "name" : "Doe"
+}
+
+
+ ...Differences
+Node at: .age
+  Value 'old' did not match 'young'
+
+> Rules:
+Rules:
+ -
+
+
+
+ - [  OK  ] a request for User Smith
+[scala-pact] Run completed in: 999 ms
+[scala-pact] Total number of test run: 2
+[scala-pact] Tests: succeeded 1, failed 1, pending 0
+[scala-pact] 1 Pact verify tests failed.
 ```
 
 ### Internal Approach (as a test)
