@@ -59,23 +59,30 @@ $ cd broker
 $ docker-compose up
 ```
 
+Connect to it via the browser: http://localhost/ (use credentials provided in `broker/README.md`)
+
 ## 2. Run Gate Tests
 ```
 $ cd gate/tests
 $ python -m pytest pact_wd.py
 ```
 
+The pact is uploaded on the broker:
+![broker 1](broker_1.png)
+
+It can be checked: http://localhost/pacts/provider/wd/consumer/gate/latest
+
 ## 3. Verify (passing test)
 
 ```
 $ cd wd
 $ sbt compile run # terminal 1
-$ sbt "pactVerify --host localhost --port 8080 --protocol http"
+$ sbt "pactVerify --host localhost --port 8080 --protocol http" # terminal 2
 ```
 
 ## 4. Verify (failing test)
 
-### a) Modify WD to induce a breach of contract
+### a) Modify WD to trigger a breach of contract
 
 ```
 --- a/wd/src/main/scala/com/Ledger/UserRegistry.scala
