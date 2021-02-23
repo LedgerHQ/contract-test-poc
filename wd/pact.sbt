@@ -7,13 +7,17 @@ import com.itv.scalapact.shared.ConsumerVersionSelector
 import scala.concurrent.duration._
 
 val testTag = "v0.0.1-test"
+val consumerName = "gate"
 
 pactBrokerAddress := "http://localhost"
-//For publishing to pact-broker test server (these credentials are public knowledge)
 pactBrokerCredentials := ("pactbroker", "PoC_P4CT!")
-consumerVersionSelectors := Seq(ConsumerVersionSelector(testTag, latest = false))
-consumerNames := Seq("gate")
+
+consumerNames := Seq(consumerName)
 providerName := "wd"
+
+// Select the tag to test
+consumerVersionSelectors := Seq(ConsumerVersionSelector(testTag, latest=false))
+
 pactBrokerClientTimeout := 5.seconds
 
 // Provider State
