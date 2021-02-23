@@ -8,5 +8,12 @@ Password: `Just_for_t3st1ng`
 Username: `pactbroker`
 Password: `PoC_P4CT!`
 
+### Run
+
+```
+$ cd broker
+$ docker-compose up
+```
+
 ### Ensure that the pact has been published:
 http://localhost/pacts/provider/wd/consumer/gate/latest

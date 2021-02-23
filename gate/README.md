@@ -1,5 +1,11 @@
 # gate (Provider and Consumer)
 
+## Setup
+
+```
+pip3 install -r requirements.txt
+```
+
 ## Run
 
 ```

@@ -1,8 +1,9 @@
-# Run the gate and the wd
+# Setup and run the gate and the wd
 
 ## Gate (http://127.0.0.1:5000/user)
 ```
 $ cd gate
+$ pip3 install -r requirements.txt
 $ python3 src/gate.py
  * Serving Flask app "gate" (lazy loading)
  * Environment: production
@@ -16,7 +17,7 @@ $ python3 src/gate.py
 
 ```
 $ cd wd
-$ sbt run
+$ sbt compile run
   [info] welcome to sbt 1.4.6 (Oracle Corporation Java 14.0.2)
   [info] loading global plugins from /Users/glethuillier/.sbt/1.0/plugins
   [info] loading settings for project wd-build from plugins.sbt ...

@@ -53,6 +53,30 @@
           "name": "Smith"
         }
       }
+    },
+    {
+      "description": "a request for User Smith",
+      "providerState": "User ALICE is 20 years old",
+      "request": {
+        "method": "POST",
+        "path": "/user",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "ALICE",
+          "age": 20
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "age": "young",
+          "name": "ALICE"
+        }
+      }
     }
   ],
   "metadata": {

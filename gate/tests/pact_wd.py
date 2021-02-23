@@ -57,7 +57,6 @@ def test_old_user(pact):
         assert('old' in result)
 
 
-
 def test_young_user(pact):
     expected = {
       'age': 'young',
@@ -76,4 +75,24 @@ def test_young_user(pact):
 
     with pact:
         result = request_wd('Smith', 10)
+        assert('young' in result)
+
+def test_young_user_uppercase(pact):
+    expected = {
+      'age': 'young',
+      'name': 'ALICE',
+    }
+
+    (pact
+     .given('User ALICE is 20 years old')
+     .upon_receiving('a request for User Smith')
+     .with_request(
+        method='POST',
+        path= '/user',
+        body={'name': 'ALICE', 'age': 20},
+        headers={'Content-Type': 'application/json'})
+     .will_respond_with(200, body=expected))
+
+    with pact:
+        result = request_wd('ALICE', 20)
         assert('young' in result)

@@ -24,6 +24,9 @@ providerStateMatcher := {
   case key: String if key == "User Smith is 10 years old" =>
     true
 
+  case key: String if key == "User ALICE is 20 years old" =>
+    true
+      
   // TODO: create a default state?
 }
 // PACT ^-------------------------------------------------------^
