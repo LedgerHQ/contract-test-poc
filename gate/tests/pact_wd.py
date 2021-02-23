@@ -67,7 +67,7 @@ def test_young_user(pact):
     }
 
     (pact
-     .given('User Smith is 10 years old')
+     #.given('User Smith is 10 years old')
      .upon_receiving('a request for User Smith')
      .with_request(
         method='POST',
@@ -87,8 +87,8 @@ def test_young_user_uppercase(pact):
     }
 
     (pact
-     .given('User ALICE is 20 years old')
-     .upon_receiving('a request for User Smith')
+     #.given('User ALICE is 20 years old')
+     .upon_receiving('a request for User ALICE')
      .with_request(
         method='POST',
         path= '/user',

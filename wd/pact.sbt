@@ -8,15 +8,19 @@ import scala.concurrent.duration._
 
 val testTag = "v0.0.1-test"
 val consumerName = "gate"
+val providerVersion = "0.0.2"
 
 pactBrokerAddress := "http://localhost"
 pactBrokerCredentials := ("pactbroker", "PoC_P4CT!")
 
-consumerNames := Seq(consumerName)
 providerName := "wd"
+providerVersionTags := List(providerVersion)
+providerVersionTags := List("Test-provider")
 
-// Select the tag to test
+consumerNames := Seq(consumerName)
 consumerVersionSelectors := Seq(ConsumerVersionSelector(testTag, latest=false))
+
+pactPublish := true
 
 pactBrokerClientTimeout := 5.seconds
 
@@ -25,13 +29,8 @@ pactBrokerClientTimeout := 5.seconds
 // cf. http://io.itv.com/scala-pact/articles/verification-strategies.html#external-verification
 // and http://io.itv.com/scala-pact/advanced/provider-states.html
 providerStateMatcher := {
+        // Useless state for demonstration purposes
   case key: String if key == "User Doe is 123 years old" =>
-    true
-
-  case key: String if key == "User Smith is 10 years old" =>
-    true
-
-  case key: String if key == "User ALICE is 20 years old" =>
     true
       
   // TODO: create a default state?

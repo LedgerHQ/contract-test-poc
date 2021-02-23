@@ -38,6 +38,14 @@ $ curl -H "Content-type: application/json" -X POST -d '{"name": "Bob", "age": 10
 
 ### External Approach (from command line)
 
+**IMPORTANT: no possibility to publish results to the broker using this method**
+
+Contra: https://docs.pact.io/implementation_guides/jvm/provider/sbt/#using-the-old-verifypacts-task
+
+> pact.verifier.publishResults	Publishing of verification results will be skipped unless this property is set to 'true[version 3.5.18+]
+
+Did not manage to add `addSbtPlugin("au.com.dius" %% "pact-jvm-provider-sbt" % "3.5.18")` though.
+
 Terminal 1: run provider
 ```
 $ sbt compile run
@@ -52,8 +60,10 @@ $ sbt "pactVerify --source pact/ --host localhost --port 8080 --protocol http"
 
 Option 2. Verify (using a broker)
 ```
-$ sbt "pactVerify --host localhost --port 8080 --protocol http"
+$ sbt -Dproperty=pact.verifier.publishResults	"pactVerify --host localhost --port 8080 --protocol http"
 ```
+
+(`-Dproperty=pact.verifier.publishResults` does not work).
 
 Example:
 ```
@@ -171,8 +181,6 @@ Rules:
 
 ### Internal Approach (as a test)
 
-TODO
+Run tests from `src/test/scala/com/ledger/VerifyPactGate.scala`
 
-## Issues
-
-- It is required to have a `providerStateMatcher` in a `pact.sbt` file. Should be generic instead of having to match each provider state in the pact.
+**Using this method, the results are published to the broker** thanks to `Some(BrokerPublishData(providerVersion, None))`
