@@ -53,7 +53,7 @@ def test_old_user(pact):
         path= '/user',
         body={'name': 'Doe', 'age': 123},
         headers={'Content-Type': 'application/json'})
-     .will_respond_with(200, body=Like(expected)))
+     .will_respond_with(200, body=expected))
 
     with pact:
         result = request_wd('Doe', 123)
@@ -74,7 +74,7 @@ def test_young_user(pact):
         path= '/user',
         body={'name': 'Smith', 'age': 10},
         headers={'Content-Type': 'application/json'})
-     .will_respond_with(200, body=Like(expected)))
+     .will_respond_with(200, body=expected))
 
     with pact:
         result = request_wd('Smith', 10)
@@ -94,7 +94,7 @@ def test_young_user_uppercase(pact):
         path= '/user',
         body={'name': 'ALICE', 'age': 20},
         headers={'Content-Type': 'application/json'})
-     .will_respond_with(200, body=Like(expected)))
+     .will_respond_with(200, body=expected))
 
     with pact:
         result = request_wd('ALICE', 20)

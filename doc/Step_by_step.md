@@ -89,8 +89,77 @@ http://localhost/matrix/provider/wd/consumer/gate
 
 # Change the Gate provider implementation
 
-TODO
+**Change: the name is no longer capitalized**
+
+a) Modify the way the Gate responds to a request in such a way that it produces a breach of contract. For instance:
+
+```
+diff --git a/gate/src/gate.py b/gate/src/gate.py
+index c383584..3d6afe7 100644
+--- a/gate/src/gate.py
++++ b/gate/src/gate.py
+@@ -10,7 +10,7 @@ def request_wd(name, age):
+     return req.content.decode('utf-8')
+
+ def capitalize_name(name):
+-    return name.upper()
++    return name
+```
+
+b) Verify
+
+```
+$ pact-provider-verifier --provider-base-url=http://localhost:5000 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="gate" --consumer-version-tag="expectations_from_UI_0.0.1c" --publish-verification-results --provider-app-version="0.0.2p"
+```
+
+![Gate Failure](Failure_gate.png)
+
+c) From the broker interface:
+
+![Gate Failure broker](Failure_gate_broker.png)
+
 
 # Change the WD provider implementation
 
-TODO
+**Change: old when >= 200 years old instead of 100**
+
+a) Modify the way the WD responds to a request in such a way that it produces a breach of contract. For instance:
+
+```
+diff --git a/wd/src/main/scala/com/Ledger/UserRegistry.scala b/wd/src/main/scala/com/Ledger/UserRegistry.scala
+index 6f506de..788077b 100644
+--- a/wd/src/main/scala/com/Ledger/UserRegistry.scala
++++ b/wd/src/main/scala/com/Ledger/UserRegistry.scala
+@@ -1,9 +1,7 @@
+ package com.ledger
+
+-import akka.actor.typed.ActorRef
+-import akka.actor.typed.Behavior
++import akka.actor.typed.{ActorRef, Behavior}
+ import akka.actor.typed.scaladsl.Behaviors
+-import scala.collection.immutable
+
+ final case class User(name: String, age: Int)
+
+@@ -20,7 +18,7 @@ object UserRegistry {
+       case JudgeAge(user, replyTo) =>
+         var age = user.age
+         var judgement = "young"
+-        if (age >= 100) {
++        if (age >= 200) {
+           judgement = "old"
+         }
+         replyTo ! JudgmentPerformed(s"${user.name}", judgement)
+```
+
+b) Verify
+
+```
+$ pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="wd" --consumer-version-tag="expectations_from_gate_0.0.2c" --publish-verification-results --provider-app-version="0.0.3p"
+```
+
+![WD Failure](Failure_WD.png)
+
+c) From the broker interface:
+
+![WD Failure Broker](Failure_WD_broker.png)

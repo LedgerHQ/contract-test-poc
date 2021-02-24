@@ -1,9 +1,7 @@
 package com.ledger
 
-import akka.actor.typed.ActorRef
-import akka.actor.typed.Behavior
+import akka.actor.typed.{ActorRef, Behavior}
 import akka.actor.typed.scaladsl.Behaviors
-import scala.collection.immutable
 
 final case class User(name: String, age: Int)
 

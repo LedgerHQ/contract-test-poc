@@ -57,7 +57,7 @@ describe("Pact", () => {
         withRequest: {
           method: "POST",
           path: "/user",
-          body: like({ name: name, age: age}),
+          body: { name: name, age: age},
           headers: {
             "Content-Type": "application/json; charset=utf-8",
           },
@@ -67,7 +67,7 @@ describe("Pact", () => {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
           },
-          body: like({ name: 'ALICE', age: 'old'}), // still capitalized and age rendered as 'old'
+          body: { name: 'ALICE', age: 'old'}, // still capitalized and age rendered as 'old'
         },
       })
     )
@@ -87,7 +87,7 @@ describe("Pact", () => {
         withRequest: {
           method: "POST",
           path: "/user",
-          body: like({ name: name, age: age}),
+          body: { name: name, age: age},
           headers: {
             "Content-Type": "application/json; charset=utf-8",
           },
@@ -97,7 +97,7 @@ describe("Pact", () => {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
           },
-          body: like({ name: 'BOB', age: 'young'}), // capitalized and age rendered as 'young'
+          body: { name: 'BOB', age: 'young'}, // capitalized and age rendered as 'young'
         },
       })
     )
