@@ -1,5 +1,6 @@
 # General
 .DS_Store
+**/*.log
 
 # gate
 **/__pycache__/
@@ -12,3 +13,6 @@
 **/.bsp/
 **/*.cache
 **/target/
+
+# UI
+**/node_modules/*
