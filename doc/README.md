@@ -1,8 +1,8 @@
-# Setup and run the gate and the wd
+# Setup and run the Gate and the WD
 
 ## Gate (http://127.0.0.1:5000/user)
 ```
-$ cd gate
+$ cd Gate
 $ pip3 install -r requirements.txt
 $ python3 src/gate.py
  * Serving Flask app "gate" (lazy loading)
@@ -16,7 +16,7 @@ $ python3 src/gate.py
 ## WD (http://127.0.0.1:8080/user)
 
 ```
-$ cd wd
+$ cd WD
 $ sbt compile run
   [info] welcome to sbt 1.4.6 (Oracle Corporation Java 14.0.2)
   [info] loading global plugins from /Users/glethuillier/.sbt/1.0/plugins
@@ -94,12 +94,12 @@ a) Run both Gate and WD servers
 
 b) Run the verification from anywhere using `pact-provider-verifier`
 ```
-$ pact-provider-verifier --provider-base-url=http://localhost:5000 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="gate" --consumer-version-tag="expectations_from_UI_0.0.1c" --publish-verification-results --provider-app-version="0.0.2p"
+$ pact-provider-verifier --provider-base-url=http://localhost:5000 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="Gate" --consumer-version-tag="expectations_from_UI_0.0.1c" --publish-verification-results --provider-app-version="0.0.2p"
 ```
 
 c) The Gate provider is now versionned and the pact, in this context, verified
 
-http://localhost/matrix/provider/gate/consumer/UI
+http://localhost/matrix/provider/Gate/consumer/UI
 
 ![2](2_verified.png)
 
@@ -111,7 +111,7 @@ http://localhost/matrix/provider/gate/consumer/UI
 _(Ensure that the Gate and WD servers are down)._
 
 ```
-$ cd gate/tests
+$ cd Gate/tests
 $ python -m pytest pact_wd.py
 ```
 
@@ -132,12 +132,12 @@ a) Run both Gate and WD servers
 
 b) Run the verification from anywhere using `pact-provider-verifier`
 ```
-$ pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="wd" --consumer-version-tag="expectations_from_gate_0.0.2c" --publish-verification-results --provider-app-version="0.0.3p"
+$ pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="WD" --consumer-version-tag="expectations_from_gate_0.0.2c" --publish-verification-results --provider-app-version="0.0.3p"
 ```
 
 c) The WD provider is now versionned and the pact, in this context, verified
 
-http://localhost/matrix/provider/wd/consumer/gate
+http://localhost/matrix/provider/WD/consumer/Gate
 
 ![4](4_verified.png)
 
@@ -148,10 +148,10 @@ http://localhost/matrix/provider/wd/consumer/gate
 a) Modify the way the Gate responds to a request in such a way that it produces a breach of contract. For instance:
 
 ```
-diff --git a/gate/src/gate.py b/gate/src/gate.py
+diff --git a/Gate/src/gate.py b/Gate/src/gate.py
 index c383584..3d6afe7 100644
---- a/gate/src/gate.py
-+++ b/gate/src/gate.py
+--- a/Gate/src/gate.py
++++ b/Gate/src/gate.py
 @@ -10,7 +10,7 @@ def request_wd(name, age):
      return req.content.decode('utf-8')
 
@@ -165,7 +165,7 @@ b) Re-run Gate and WD servers
 c) Verify
 
 ```
-$ pact-provider-verifier --provider-base-url=http://localhost:5000 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="gate" --consumer-version-tag="expectations_from_UI_0.0.1c" --publish-verification-results --provider-app-version="0.0.2p"
+$ pact-provider-verifier --provider-base-url=http://localhost:5000 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="Gate" --consumer-version-tag="expectations_from_UI_0.0.1c" --publish-verification-results --provider-app-version="0.0.2p"
 ```
 
 ![Gate Failure](Failure_gate.png)
@@ -213,7 +213,7 @@ b) Re-run Gate and WD servers
 c) Verify
 
 ```
-$ pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="wd" --consumer-version-tag="expectations_from_gate_0.0.2c" --publish-verification-results --provider-app-version="0.0.3p"
+$ pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="WD" --consumer-version-tag="expectations_from_gate_0.0.2c" --publish-verification-results --provider-app-version="0.0.3p"
 ```
 
 ![WD Failure](Failure_WD.png)

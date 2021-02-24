@@ -2,12 +2,12 @@
 .DS_Store
 **/*.log
 
-# gate
+# Gate
 **/__pycache__/
 **/.pytest_cache/
 **/pact-mock-service.log
 
-# wd
+# WD
 **/.idea/
 **/.gradle/
 **/.bsp/

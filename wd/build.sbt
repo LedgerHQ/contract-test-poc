@@ -8,7 +8,7 @@ lazy val root = (project in file(".")).
       organization    := "com.ledger",
       scalaVersion    := "2.12.12" // see: https://github.com/ITV/scala-pact/blob/17e64f4742c99b6f1932d4b4eaa10ff65950f052/build.sbt#L70-L72
     )),
-    name := "wd",
+    name := "WD",
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-http"                % akkaHttpVersion,
       "com.typesafe.akka" %% "akka-http-spray-json"     % akkaHttpVersion,

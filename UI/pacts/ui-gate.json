@@ -3,7 +3,7 @@
     "name": "UI"
   },
   "provider": {
-    "name": "gate"
+    "name": "Gate"
   },
   "interactions": [
     {

@@ -5,7 +5,7 @@ import atexit
 import pytest
 
 from pact import Consumer, Like, Provider, Term, Format
-from gate.src.gate import request_wd
+from Gate.src.gate import request_wd
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -30,8 +30,8 @@ def pact(request):
     version = request.config.getoption('--publish-pact')
     publish = True if version else False
 
-    pact = Consumer('gate', tags=[test_tag], version=pact_specification).has_pact_with(
-        Provider('wd'), host_name=PACT_MOCK_HOST, port=PACT_MOCK_PORT,
+    pact = Consumer('Gate', tags=[test_tag], version=pact_specification).has_pact_with(
+        Provider('WD'), host_name=PACT_MOCK_HOST, port=PACT_MOCK_PORT,
         pact_dir=PACT_DIR, publish_to_broker=True, broker_base_url=PACT_BROKER_URL,
         broker_username=PACT_BROKER_USERNAME, broker_password=PACT_BROKER_PASSWORD, version=gate_version)
     pact.start_service()

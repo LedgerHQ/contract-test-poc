@@ -1,4 +1,4 @@
-# gate (Provider and Consumer)
+# Gate (Provider and Consumer)
 
 ## Setup
 
@@ -24,7 +24,7 @@ $ python -m pytest pact_wd.py
 ### External Method: Using pact-provider-verifier
 
 ```
-$ pact-provider-verifier --provider-base-url=http://localhost:5000 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="gate" --consumer-version-tag="expectations_from_UI_0.0.1c" --publish-verification-results --provider-app-version="0.0.2p"
+$ pact-provider-verifier --provider-base-url=http://localhost:5000 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="Gate" --consumer-version-tag="expectations_from_UI_0.0.1c" --publish-verification-results --provider-app-version="0.0.2p"
 ```
 
 ### Internal Method

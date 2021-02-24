@@ -1,9 +1,9 @@
 {
   "consumer": {
-    "name": "gate"
+    "name": "Gate"
   },
   "provider": {
-    "name": "wd"
+    "name": "WD"
   },
   "interactions": [
     {

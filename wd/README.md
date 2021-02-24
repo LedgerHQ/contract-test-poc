@@ -1,4 +1,4 @@
-# wd (Provider)
+# WD (Provider)
 
 (Implementation based on: https://developer.lightbend.com/guides/akka-http-quickstart-scala/)
 
@@ -19,8 +19,8 @@ $ scala target/scala-2.13/wd_provider-assembly-0.1.0-SNAPSHOT.jar
 ### Option 3. Docker
 
 ```
-$ docker build -t wd .
-$ docker run wd
+$ docker build -t WD .
+$ docker run WD
 ```
 
 ### Examples of Requests
@@ -39,7 +39,7 @@ $ curl -H "Content-type: application/json" -X POST -d '{"name": "Bob", "age": 10
 ### External Approach 1: pact-provider-verifier
 
 ```
-$ pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="wd" --consumer-version-tag="expectations_from_gate_0.0.2c" --publish-verification-results --provider-app-version="0.0.3p"
+$ pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="WD" --consumer-version-tag="expectations_from_gate_0.0.2c" --publish-verification-results --provider-app-version="0.0.3p"
 ```
 
 ### External Approach 2: SBT

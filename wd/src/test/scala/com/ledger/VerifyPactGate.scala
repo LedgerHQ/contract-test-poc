@@ -20,7 +20,7 @@ class VerifyPactGate extends FunSpec with Matchers with BeforeAndAfterAll with P
           // +  : https://github.com/ITV/scala-pact/blob/17e64f4742c99b6f1932d4b4eaa10ff65950f052/broker-integration-tests/provider/src/test/scala/provider/VerifyContractsSpec.scala#L41-L52
           pactBrokerWithVersionSelectors(
             "http://localhost", // broker url
-            "wd", // provider name
+            "WD", // provider name
             List(consumer), // consumer tag
             List(providerTag), // provider tag
             PendingPactSettings.PendingDisabled,

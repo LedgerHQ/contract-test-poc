@@ -7,13 +7,13 @@ import com.itv.scalapact.shared.ConsumerVersionSelector
 import scala.concurrent.duration._
 
 val testTag = "expectations_from_gate_0.0.2c"
-val consumerName = "gate"
+val consumerName = "Gate"
 val providerVersion = "0.0.3p"
 
 pactBrokerAddress := "http://localhost"
 pactBrokerCredentials := ("pactbroker", "PoC_P4CT!")
 
-providerName := "wd"
+providerName := "WD"
 providerVersionTags := List(providerVersion)
 providerVersionTags := List("Test-provider")
 

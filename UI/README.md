@@ -11,14 +11,14 @@ $ npm i
 ## 1. Run the Gate Provider
 
 ```
-$ cd gate
+$ cd Gate
 $ python3 src/gate.py
 ```
 
 ## 2. Run the WD Provider
 
 ```
-$ cd wd
+$ cd WD
 $ sbt run
 ```
 
