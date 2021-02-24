@@ -10,8 +10,8 @@ const exec = command =>
       .toString()
       .trim()
 
-const consumerVersion = '0.0.1'
-const tag = 'test-UI-gate'
+const consumerVersion = '0.0.1c'
+const tag = 'expectations_from_UI_0.0.1c'
   
 const opts = {
     pactFilesOrDirs: [path.resolve(process.cwd(), "pacts")],

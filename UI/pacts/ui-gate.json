@@ -7,6 +7,40 @@
   },
   "interactions": [
     {
+      "description": "a request for user ALICE, aged 101",
+      "request": {
+        "method": "POST",
+        "path": "/user",
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "name": "ALICE",
+          "age": 101
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "name": "ALICE",
+          "age": "old"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
       "description": "a request for user Bob, aged 32",
       "request": {
         "method": "POST",

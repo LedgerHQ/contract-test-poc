@@ -6,9 +6,9 @@ import com.itv.scalapact.shared.ConsumerVersionSelector
 // Broker
 import scala.concurrent.duration._
 
-val testTag = "v0.0.1-test"
+val testTag = "expectations_from_gate_0.0.2c"
 val consumerName = "gate"
-val providerVersion = "0.0.2"
+val providerVersion = "0.0.3p"
 
 pactBrokerAddress := "http://localhost"
 pactBrokerCredentials := ("pactbroker", "PoC_P4CT!")

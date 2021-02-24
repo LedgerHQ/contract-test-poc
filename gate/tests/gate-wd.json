@@ -27,6 +27,11 @@
         "body": {
           "age": "old",
           "name": "Doe"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
         }
       }
     },
@@ -50,6 +55,11 @@
         "body": {
           "age": "young",
           "name": "Smith"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
         }
       }
     },
@@ -73,6 +83,11 @@
         "body": {
           "age": "young",
           "name": "ALICE"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
         }
       }
     }

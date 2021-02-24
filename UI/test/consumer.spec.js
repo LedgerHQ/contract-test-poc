@@ -47,7 +47,37 @@ describe("Pact", () => {
   } = require("../src/consumer")
 
 
-  describe("when a call to the Gate is made to assess User's age", () => {
+  describe("when a call to the Gate is made to assess ALICE's age", () => {
+    const name = 'ALICE'
+    const age = 101
+
+    before(() =>
+      provider.addInteraction({
+        uponReceiving: "a request for user ALICE, aged 101",
+        withRequest: {
+          method: "POST",
+          path: "/user",
+          body: like({ name: name, age: age}),
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        },
+        willRespondWith: {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body: like({ name: 'ALICE', age: 'old'}), // still capitalized and age rendered as 'old'
+        },
+      })
+    )
+
+    it("a response is given", done => {
+      expect(checkAge(name, age)).to.eventually.be.fulfilled.notify(done)
+    })
+  })
+
+  describe("when a call to the Gate is made to assess Bob's age", () => {
     const name = 'Bob'
     const age = 32
 

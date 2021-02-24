@@ -10,8 +10,8 @@ class VerifyPactGate extends FunSpec with Matchers with BeforeAndAfterAll with P
 
   describe("Verifying Consumer Contracts") {
     it("should be able to verify it's contracts") {
-      val consumer = ConsumerVersionSelector("v0.0.1-test", latest = false) // This should fetch all the latest pacts of consumer with tag example
-      val providerVersion = "0.1.3"
+      val consumer = ConsumerVersionSelector("expectations_from_gate_0.0.2", latest = false) // This should fetch all the latest pacts of consumer with tag example
+      val providerVersion = "0.0.3"
       val providerTag = "test-provider"
 
       verifyPact

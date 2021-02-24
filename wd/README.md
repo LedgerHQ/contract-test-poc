@@ -36,7 +36,13 @@ $ curl -H "Content-type: application/json" -X POST -d '{"name": "Bob", "age": 10
 
 ## Verify
 
-### External Approach (from command line)
+### External Approach 1: pact-provider-verifier
+
+```
+$ pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-broker-base-url=http://localhost --broker-username=pactbroker --broker-password=PoC_P4CT! --provider="wd" --consumer-version-tag="expectations_from_gate_0.0.2c" --publish-verification-results --provider-app-version="0.0.3p"
+```
+
+### External Approach 2: SBT
 
 **IMPORTANT: no possibility to publish results to the broker using this method**
 
