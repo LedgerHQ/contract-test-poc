@@ -17,6 +17,9 @@ Connect to http://localhost/
 
 _(Ensure that the Gate and WD servers are down)._
 
+- UI consumer version: `0.0.1c`
+- Gate provider version: **not relevant at this stage**
+
 ```
 $ cd UI
 $ npm test
@@ -29,6 +32,9 @@ http://localhost/matrix/provider/gate/consumer/UI
 ![1b](1b_matrix.png)
 
 ## 2. Verify Gate provider against UI expectations
+
+- UI consumer version: `0.0.1c`
+- Gate provider version: `0.0.2p` **(important)**
 
 a) Run both Gate and WD servers
 
@@ -44,6 +50,9 @@ http://localhost/matrix/provider/gate/consumer/UI
 ![2](2_verified.png)
 
 ## 3. Generate pact via Gate tests (Gate consumer expectations)
+
+- Gate consumer version: `0.0.2p`
+- WD provider version:  **not relevant at this stage**
 
 _(Ensure that the Gate and WD servers are down)._
 
@@ -61,6 +70,9 @@ http://localhost/matrix/provider/wd/consumer/gate
 ![3b](3b_matrix.png)
 
 ## 4. Verify WD provider against Gate consumer expectations
+
+- Gate consumer version: `0.0.2c`
+- WD provider version: `0.0.3p` **(important)**
 
 a) Run both Gate and WD servers
 
