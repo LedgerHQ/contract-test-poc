@@ -18,7 +18,7 @@ class ShakingError extends React.Component {
   }
   
   render() {
-  	return <div key={this.state.key} className="bounce">{this.props.text}</div>;
+  	return <div key={this.state.key}>{this.props.text}</div>;
   }
 }
 
@@ -83,16 +83,17 @@ class MyForm extends React.Component {
           className={displayErrors ? 'displayErrors' : ''}
          >
         <div className="user-box">
-          <label htmlFor="name"></label>
           <input
             id="name"
             name="name"
             type="text"
-          />
+            placeholder="Peter"/>
+          <label htmlFor="name">Name</label>
+
         </div>
         <div className="user-box">
-          <label htmlFor="age"></label>
-          <input id="age" name="age" type="text" required />
+          <input id="age" name="age" type="text" placeholder="95"/>
+          <label htmlFor="age">Age</label>
         </div>
           <a href="#">
             <span></span>
