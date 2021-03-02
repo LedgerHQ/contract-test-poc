@@ -7,6 +7,9 @@ const inputParsers = {
   number(input) {
     return parseFloat(input);
   },
+  text(input) {
+    return input.charAt(0).toUpperCase() + input.slice(1)
+  }
 };
 
 class ShakingError extends React.Component {
@@ -40,15 +43,6 @@ class MyForm extends React.Component {
     }
     const form = event.target;
     const data = new FormData(form);
-    const postForm = (body) => {
-      return fetch(BASE_URL + 'user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: stringifyFormData(data)
-      });
-    };
 
     for (let name of data.keys()) {
       const input = form.elements[name];
@@ -63,7 +57,7 @@ class MyForm extends React.Component {
       invalid: false,
       displayErrors: false,
     });
-    const res = await postForm(data)
+    const res = await judgeAge(data)
     const dataToDisplay = await res.json()
     this.setState({
       res: dataToDisplay,
@@ -108,10 +102,21 @@ class MyForm extends React.Component {
           {invalid && (
             <ShakingError text="Form is not valid" />
           )}
-          {!invalid && res && (
+          {!invalid && res && res.age == 'old' && (
           	<div className="response-block">
-              <h3>Listen, {res.name}</h3>
-              <pre>you are {res.age}</pre>
+              <h3>Oh no, it's {res.name} again</h3>
+              <pre>Go away you <strong>{res.age}</strong> fart</pre>
+          	</div>
+          )}
+          {!invalid && res && res.age == 'young' && (
+          	<div className="response-block">
+              <h3>Suuup, {res.name} ?</h3>
+              <pre>How is it going, <strong>{res.age}</strong> blood </pre>
+          	</div>
+          )}
+          {!invalid && res && res.description && (
+          	<div className="response-block">
+              <h3 style={{ color: 'red' }} >{res.description}</h3>
           	</div>
           )}
         </div>
@@ -127,5 +132,16 @@ function stringifyFormData(fd) {
   }
   return JSON.stringify(data, null, 2);
 }
+
+function judgeAge(data) {
+  return fetch(BASE_URL + 'user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: stringifyFormData(data)
+  });
+};
+
 
 export default MyForm;

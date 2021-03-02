@@ -47,6 +47,10 @@ describe("Pact", () => {
   } = require("../src/consumer")
 
 
+  const form = require("../src/age-app/src/components/Form")
+  const judge = form.judgeAge()
+
+
   describe("when a call to the Gate is made to assess ALICE's age", () => {
     const name = 'ALICE'
     const age = 101
