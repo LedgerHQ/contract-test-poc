@@ -33,7 +33,6 @@ def handle_exception(e):
     return response
 
 
-
 @api.route('/user', methods=['POST'])
 def judge_name():
     print(request.get_json())
@@ -50,7 +49,6 @@ def judge_name():
                 status=200,
                 mimetype='application/json; charset=utf-8'
             )
-
 
 
 if __name__ == '__main__':

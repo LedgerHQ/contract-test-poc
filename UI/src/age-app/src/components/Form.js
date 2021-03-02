@@ -53,9 +53,18 @@ class MyForm extends React.Component {
         data.set(name, parsedValue);
       }
     }
+<<<<<<< HEAD
 
     const dataToSend = stringifyFormData(data)
     const res = await judgeAge(dataToSend)
+=======
+    this.setState({
+    	res: stringifyFormData(data),
+      invalid: false,
+      displayErrors: false,
+    });
+    const res = await judgeAge(data)
+>>>>>>> 6172ad6... Refactored the front and gate to handle negative age
     const dataToDisplay = await res.json()
     this.setState({
       res: dataToDisplay,
@@ -107,6 +116,7 @@ class MyForm extends React.Component {
           	</div>
           )}
           {!invalid && res && res.age == 'young' && (
+<<<<<<< HEAD
           	<div className="response-block">
               <h3>Suuup, {res.name} ?</h3>
               <pre>How is it going, <strong>{res.age}</strong> blood </pre>
@@ -114,6 +124,15 @@ class MyForm extends React.Component {
           )}
           {!invalid && res && res.description && (
           	<div className="response-block">
+=======
+          	<div className="response-block">
+              <h3>Suuup, {res.name} ?</h3>
+              <pre>How is it going, <strong>{res.age}</strong> blood </pre>
+          	</div>
+          )}
+          {!invalid && res && res.description && (
+          	<div className="response-block">
+>>>>>>> 6172ad6... Refactored the front and gate to handle negative age
               <h3 style={{ color: 'red' }} >{res.description}</h3>
           	</div>
           )}
@@ -130,5 +149,16 @@ function stringifyFormData(fd) {
   }
   return JSON.stringify(data, null, 2);
 }
+
+function judgeAge(data) {
+  return fetch(BASE_URL + 'user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: stringifyFormData(data)
+  });
+};
+
 
 export default MyForm;
