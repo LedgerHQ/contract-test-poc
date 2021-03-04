@@ -131,15 +131,4 @@ function stringifyFormData(fd) {
   return JSON.stringify(data, null, 2);
 }
 
-function judgeAge(data) {
-  return fetch(BASE_URL + 'user', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: stringifyFormData(data)
-  });
-};
-
-
 export default MyForm;
