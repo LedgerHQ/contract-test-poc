@@ -35,6 +35,8 @@ def handle_exception(e):
 
 @api.route('/user', methods=['POST'])
 def judge_name():
+    print(request.get_json())
+    print(request.method)
     if request.method == 'POST':
         content = request.get_json(force=True)
         if int(content['age']) < 0:

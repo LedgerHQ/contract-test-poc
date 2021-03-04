@@ -1,7 +1,8 @@
 import React from 'react';
 import './Form.css'
+import { judgeAge } from "../helpers.js"
 
-const BASE_URL = "http://localhost:5000/"
+
 
 const inputParsers = {
   number(input) {
@@ -44,6 +45,7 @@ class MyForm extends React.Component {
     const form = event.target;
     const data = new FormData(form);
 
+
     for (let name of data.keys()) {
       const input = form.elements[name];
       const parserName = input.dataset.parse;
@@ -52,12 +54,9 @@ class MyForm extends React.Component {
         data.set(name, parsedValue);
       }
     }
-    this.setState({
-    	res: stringifyFormData(data),
-      invalid: false,
-      displayErrors: false,
-    });
-    const res = await judgeAge(data)
+
+    const dataToSend = stringifyFormData(data)
+    const res = await judgeAge(dataToSend)
     const dataToDisplay = await res.json()
     this.setState({
       res: dataToDisplay,
@@ -127,21 +126,10 @@ class MyForm extends React.Component {
 
 function stringifyFormData(fd) {
   const data = {};
-	for (let key of fd.keys()) {
-  	data[key] = fd.get(key);
+    for (let key of fd.keys()) {
+      data[key] = fd.get(key);
   }
   return JSON.stringify(data, null, 2);
 }
-
-function judgeAge(data) {
-  return fetch(BASE_URL + 'user', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: stringifyFormData(data)
-  });
-};
-
 
 export default MyForm;
